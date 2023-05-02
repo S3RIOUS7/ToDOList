@@ -1,3 +1,31 @@
-.header__logo{
+
+.header{
     display: flex;
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.headerDiskr{
+    display: flex;
+}
+.header__logo img{
+    width: 90px;
+    height: 90px;
+}
+.logoDiskrImg{
+    display: flex;
+    justify-content: center;
+}
+.logoDiskrImg h1{
+    margin: 0;
+    padding: 0;
+}
+.headerDiskr p{
+    margin: 0;
+    padding: 0;
+}
+
+.logoDiskrImg img{
+    width: 45px;
+    height: 37px;
 }
