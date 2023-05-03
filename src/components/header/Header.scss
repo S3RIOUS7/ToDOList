@@ -1,28 +1,59 @@
-
+.container{
+    width: calc(100vw - 100px);
+    height: 100%;
+    background-color: #fff;
+    margin: 50px auto;
+    border-radius: 10px;
+    max-width: 1400px;
+   
+}
 .header{
     display: flex;
     justify-content: space-between;
     font-family: 'Montserrat', sans-serif;
     font-family: 'Roboto Condensed', sans-serif;
+  
+
 }
 .headerDiskr{
     display: flex;
+}
+.header__logo{
+    margin: 25px 0px;
 }
 .header__logo img{
     width: 90px;
     height: 90px;
 }
+.headerTitle{
+     color: fuchsia;
+     font-size: 26px;
+}
+.headerLogIn{
+    font-size: 30px;
+    justify-content: center;
+    text-align: center;
+    margin: 40px 0px;
+    font-weight: bold;
+    color: rgb(149, 86, 221);
+}
+.logoDiskr{
+    padding: 25px 0px;
+}
 .logoDiskrImg{
     display: flex;
     justify-content: center;
 }
-.logoDiskrImg h1{
+.logoDiskrImg {
     margin: 0;
-    padding: 0;
+    
+    font-size: 35px;
+
 }
 .headerDiskr p{
     margin: 0;
-    padding: 0;
+    padding:10px 0px;
+    font-size: 25px;
 }
 
 .logoDiskrImg img{

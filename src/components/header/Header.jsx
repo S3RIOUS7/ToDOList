@@ -11,11 +11,11 @@ function Header(){
         <div className="header__logo">
             <img width="45" src= {logoSvg} alt="boy" /></div>
             <div className="logoDiskr">
-              <div className='logoDiskrImg'><h1>Hi Shobhit</h1> <div className="logoHand"><img src= {handSvg} alt="hand"/></div></div>
+              <div className='logoDiskrImg'>Hi Shobhit <div className="logoHand"><img src= {handSvg} alt="hand"/></div></div>
              <p>{} tasks pending</p>
             </div></div>
             <div className='headerTitle'><h1>TaskDO</h1></div>
-            <div className='headerLogIn'><h2>login</h2></div>
+            <div className='headerLogIn'>Login</div>
         </div>
         </div>
     );
