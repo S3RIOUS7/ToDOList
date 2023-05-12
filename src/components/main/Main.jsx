@@ -11,12 +11,9 @@ function Main () {
 
     const addTask = () => {
         setTaskMainAll([...taskMainAll, value])
-
-        return(
-            console.log( addTask )
-        )
-
     }
+    
+
     
     console.log(taskMainAll)
     return(
@@ -25,6 +22,7 @@ function Main () {
             <button className="button" onClick={() => addTask()}> <div>+</div> 
             <button className="button--Add">Add New Task</button></button></div>
             <Input value={value} setValue={setValue}/>
+            {taskMainAll && taskMainAll.map((item, i) => <div key={i}>{item}</div>)}
         </div>
     );
 
