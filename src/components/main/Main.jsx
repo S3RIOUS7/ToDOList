@@ -2,6 +2,7 @@ import "./main.scss"
 import React, { useState } from "react";
 
 import Input from "../input/Input";
+import Button from "../button/Button";
 
 
 
@@ -18,9 +19,7 @@ function Main () {
     console.log(taskMainAll)
     return(
         <div className="main">
-            <div className="mainButtonAdd">
-            <button className="button" onClick={() => addTask()}> <div>+</div> 
-            <button className="button--Add">Add New Task</button></button></div>
+            <button className="mainButtonAdd" onClick={() => addTask()}><Button /></button>
             <Input value={value} setValue={setValue}/>
             {taskMainAll && taskMainAll.map((item, i) => <div key={i}>{item}</div>)}
         </div>

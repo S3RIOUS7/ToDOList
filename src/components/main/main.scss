@@ -3,6 +3,8 @@
   margin: 0;
   justify-content: center;
   display: flex;
+  flex-direction: column;
+  background-color: white;
 }
 
 .mainButtonAdd {
@@ -10,48 +12,7 @@
   margin: 0;
   justify-content: center;
   display: flex;
-}
-.button {
-  background-color: #e045ee;
   border: none;
-  color: white;
-  padding: 5px 15px;
-  text-align: center;
-  font-size: 10px;
-  margin: 4px 2px;
-  opacity: 0.6;
-  transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 50%;
-  margin: 0;
-}
-.button:hover {
-  opacity: 1;
-}
-.button p {
-  font-size: 30px;
-  margin: 0;
-  padding: 0;
+  background-color: white;
 }
 
-.button--Add {
-  background-color: white;
-  border: none;
-  color: #e045ee;
-  padding: 5px 15px;
-  text-align: center;
-  font-size: 30px;
-  margin: 4px 2px;
-  opacity: 0.6;
-  transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 50%;
-  margin: 0;
-}
-.button--Add:hover {
-  opacity: 1;
-}
