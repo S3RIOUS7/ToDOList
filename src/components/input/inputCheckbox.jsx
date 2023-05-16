@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-const Input = ({value, setValue}) => {
+const InputCheckbox = ({value, setValue}) => {
    
 
     
@@ -10,9 +10,9 @@ const Input = ({value, setValue}) => {
     
     return(
         <div>
-            <input value={value} onChange={ (event)=> getValueInput(event)} /> 
+            <input  value={value} type='checkbox' onChange={ (event)=> getValueInput(event)} /> 
         </div>
     );
 }
 
-export default Input
+export default InputCheckbox;

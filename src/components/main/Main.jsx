@@ -1,8 +1,10 @@
 import "./main.scss"
 import React, { useState } from "react";
+import bagSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/bag.png'
 
 import Input from "../input/Input";
 import Button from "../button/Button";
+import InputCheckbox from "../input/inputCheckbox";
 
 
 
@@ -17,15 +19,24 @@ function Main () {
 
     
     console.log(taskMainAll)
+    console.log(Button)
     return(
         <div className="main">
-            <button className="mainButtonAdd" onClick={() => addTask()}><Button /></button>
+            <div className="mainButtonAdd"><button  onClick={() => addTask()}><Button /></button></div>
+            
             <Input value={value} setValue={setValue}/>
-            {taskMainAll && taskMainAll.map((item, i) => <div key={i}>{item}</div>)}
+            
+            {taskMainAll && taskMainAll.map((item, i) => 
+            <div key={i}> 
+            <div className="goal">
+                <img width="25" src={bagSvg} alt="boy" />
+            <InputCheckbox value={value} setValue={setValue}  />{item}</div>
+            </div>)}
+            
         </div>
     );
-
-
+    
+    
 }
 
 export default Main;
