@@ -9,25 +9,34 @@ import InputCheckbox from "../input/inputCheckbox";
 
 
 function Main () {
-    const [taskMainAll, setTaskMainAll] = useState([]);
-    const [value, setValue] = useState('');
+    const [taskMainAll, setTaskMainAll] = useState([]); //хранилище тасок.
+    const [value, setValue] = useState(''); //хранилище input, setValue- изменение значения value.
 
     const addTask = () => {
-        setTaskMainAll([...taskMainAll, value])
+
+        if (value !== '') {
+
+            setTaskMainAll([...taskMainAll, value])
+            
+        }
+
+         // ... spread оператор
+
     }
     
 
-    
+   
     console.log(taskMainAll)
-    console.log(Button)
+
+    
     return(
         <div className="main">
-            <div className="mainButtonAdd"><button  onClick={() => addTask()}><Button /></button></div>
+            <div className="mainButtonAdd"><button  onClick={() => addTask()}><Button /></button></div> 
             
-            <Input value={value} setValue={setValue}/>
+            <Input value={value} setValue={setValue} />
             
-            {taskMainAll && taskMainAll.map((item, i) => 
-            <div key={i}> 
+            {taskMainAll && taskMainAll.map((item, index) => 
+            <div key={index}> 
             <div className="goal">
                 <img width="25" src={bagSvg} alt="boy" />
             <InputCheckbox value={value} setValue={setValue}  />{item}</div>
