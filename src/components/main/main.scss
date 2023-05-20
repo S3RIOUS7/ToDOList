@@ -31,3 +31,12 @@
 .dnone{
   display: none;
 }
+
+.linethrou{
+  text-decoration: line-through;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 25px;
+  padding: 5px 10px;
+}

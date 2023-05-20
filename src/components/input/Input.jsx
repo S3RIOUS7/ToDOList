@@ -1,21 +1,13 @@
 import React, {useState} from 'react'
 
-const Input = ({value, setValue}) => {
+const Input = ({value, onChange, type, onClick}) => {
+    
+
+    
    
-    console.log(value)
-    
-    const getValueInput = (event) => {
-
-
-         setValue(event.target.value); //текст с инпута ложим в свой 'State' setValue 
-
-        //  console.log(event);
-    }
-    
-    
     return(
         <div>
-            <input value={value} onChange={ (event)=> getValueInput(event) }  /> 
+            <input value={value} onChange={onChange} type={type} onClick={onClick}/> 
         </div>
     );
 }
