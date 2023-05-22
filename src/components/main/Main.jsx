@@ -10,12 +10,14 @@ import {v4 as uuidv4 } from "uuid";
 function Main () {
     const [taskMainAll, setTaskMainAll] = useState([]); //хранилище тасок.
     const [value, setValue] = useState(''); //хранилище input, setValue- изменение значения value.
-    const [checked, setChecked] = useState(false);
+   
 
     const getValueInput = (event) => {
         setValue(event.target.value); //текст с инпута ложим в свой 'State' setValue 
        //  console.log(event);
-   }
+    }
+    
+
     const addTask = () => {
         const task = {
             text: value,
@@ -26,7 +28,10 @@ function Main () {
             setTaskMainAll([...taskMainAll, task])   
             setValue(''); 
     }
-         // ... spread оператор      
+         // ... spread оператор    
+         
+         console.log(taskMainAll)
+         
     }
     const checkBoxOn = (id) => {
         const changeTaskMainAll = taskMainAll.map((task) => {
@@ -39,8 +44,15 @@ function Main () {
             return task
         })   
         setTaskMainAll(changeTaskMainAll)
-    }   
-  console.log(taskMainAll)
+        
+    }
+    
+
+    const delTask = (id) => {
+        setTaskMainAll(taskMainAll.filter(obj => obj.id != id))
+        };
+      
+        
     return(
         <div className="main">
             <div className="mainButtonAdd"><button  onClick={() => addTask() } ><Button /></button></div> 
@@ -50,7 +62,7 @@ function Main () {
             {taskMainAll && taskMainAll.map((item, index) => 
             <div key={index}> 
             <div className={item.checked ? 'linethrou goal' : 'goal'} >   
-                <img width="25" src={bagSvg} alt="boy" />
+                <button className="mainButtonAdd" onClick={() => delTask(item.id) }><img width="25" src={bagSvg} alt="bag"  /></button>
                 <Input  type='checkbox' value={item.checked} onClick={() => checkBoxOn(item.id)}/>
                 {item.text}</div>
             </div>)}
