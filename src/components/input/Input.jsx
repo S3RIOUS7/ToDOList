@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 
-const Input = ({value, onChange, type, onClick}) => {
+const Input = ({value, onChange, type, onClick, checked}) => {
     
 
     
    
     return(
         <div>
-            <input value={value} onChange={onChange} type={type} onClick={onClick}/> 
+            <input value={value} onChange={onChange} type={type} onClick={onClick} checked={checked}/> 
         </div>
     );
 }
