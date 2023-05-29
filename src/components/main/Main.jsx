@@ -4,16 +4,19 @@ import bagSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/bag.png'
 import penSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/pen.png'
 import dickSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/dick.png'
 
+
 import Input from "../input/Input";
 import Button from "../button/Button";
 
 import {v4 as uuidv4 } from "uuid";
+
 
 function Main () {
     const [taskMainAll, setTaskMainAll] = useState([]); //хранилище тасок.
     const [value, setValue] = useState(''); //state(хранилище) input, setValue- изменение значения value.
     const [selectedItem, setSelectedItem] = useState(''); // хранилище
     const [editTitle, setEditTitle] = useState('');// хранилище тайтла выбраной таски 
+   
 
     const getValueInput = (event) => {
         setValue(event.target.value); //текст с инпута ложим в свой 'State' setValue (target.value(свойство ивента) target -ссылка на объект)
@@ -21,7 +24,7 @@ function Main () {
     }
 
     const addTask = () => {
-        const task = {
+        const task = { 
             text: value,
             checked: false,
             id: uuidv4(), //динамический id
@@ -31,7 +34,9 @@ function Main () {
             setValue(''); // сбрасывает стате инпута на пустую строку
     }
          // ... spread оператор  развернули массив, таск добавили
+         
     }
+
     const checkBoxOn = (id) => {
         const changeTaskMainAll = taskMainAll.map((task) => {
             if(task.id === id) {
@@ -61,9 +66,21 @@ function Main () {
         setEditTitle(event.target.value)
     }
 
-    const saveNewTask = () => {
+    const saveNewTask = (id) => {
         
-      
+        const changeTaskMainAll = taskMainAll.map((task) => {
+            if(task.id === id) {
+                return{
+                    ...task,
+                    text: editTitle,
+                }
+            }
+            return task
+        })   
+        setTaskMainAll(changeTaskMainAll);
+        
+       setSelectedItem('')
+       
     }
     
     
@@ -72,7 +89,7 @@ function Main () {
         <div className="main">
             <div className="mainButtonAdd"><button  onClick={() => addTask() } ><Button /></button></div>
             
-            <div className="mainButtonAdd"><Input type='text' value={value} onChange={(event) => getValueInput(event)}/> </div> 
+            <div className="mainButtonAdd"><Input type='text' value={value}  onChange={(event) => getValueInput(event)}/> </div> 
             
             {taskMainAll && taskMainAll.map((task, index) => 
 
@@ -82,7 +99,7 @@ function Main () {
                 <button className="mainButtonAdd" onClick={() => editTask(task.id, task.text)} ><img width="30" src={penSvg} alt="pen" /></button>
                 <Input  type='checkbox' checked={task.checked} onChange={() => checkBoxOn(task.id)}/>
                 {selectedItem === task.id ? <Input value={editTitle} onChange={(event) => changeTitle(event)}/> : task.text}
-                 <button className="mainButtonAdd"  onClick={() => saveNewTask()} ><img width="28" src={dickSvg} alt="pen" /></button></div>
+                 <button className="mainButtonAdd"  onClick={() => saveNewTask(task.id)} ><img width="28" src={dickSvg} alt="pen" /></button></div>
             </div>)}
         </div>
     );  
