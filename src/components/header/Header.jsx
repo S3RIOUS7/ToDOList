@@ -2,7 +2,10 @@ import logoSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/images.
 import handSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/hand.jpg'
 import  "./Header.scss"
 
+
 function Header(){
+
+    
 
     return(
         <div className="container">

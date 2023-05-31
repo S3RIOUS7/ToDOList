@@ -16,6 +16,7 @@ function Main () {
     const [value, setValue] = useState(''); //state(хранилище) input, setValue- изменение значения value.
     const [selectedItem, setSelectedItem] = useState(''); // хранилище
     const [editTitle, setEditTitle] = useState('');// хранилище тайтла выбраной таски 
+    const [count, setCount] = useState('');
    
 
     const getValueInput = (event) => {
@@ -32,10 +33,14 @@ function Main () {
         if (value !== '') { 
             setTaskMainAll([...taskMainAll, task])   
             setValue(''); // сбрасывает стате инпута на пустую строку
+            setCount(prevCount => prevCount + 1)
     }
          // ... spread оператор  развернули массив, таск добавили
          
+
+         
     }
+    
 
     const checkBoxOn = (id) => {
         const changeTaskMainAll = taskMainAll.map((task) => {
@@ -44,30 +49,30 @@ function Main () {
                     ...task,
                     checked: !task.checked,
                 }
+               
             }
             return task
+            
         })   
         setTaskMainAll(changeTaskMainAll)
+        
     }  
 
     const delTask = (id) => {
         setTaskMainAll(taskMainAll.filter(obj => obj.id !== id))
+        setCount(count - 1);
         };
 
-    const editTask = (id, text) => {
-        
+    const editTask = (id, text) => {  
         setSelectedItem(id);// ложиться в стейт
         setEditTitle(text);// ложиться в стейт
 
     }
-
     const changeTitle = (event) => {
 
         setEditTitle(event.target.value)
     }
-
-    const saveNewTask = (id) => {
-        
+    const saveNewTask = (id) => {       
         const changeTaskMainAll = taskMainAll.map((task) => {
             if(task.id === id) {
                 return{
@@ -78,16 +83,12 @@ function Main () {
             return task
         })   
         setTaskMainAll(changeTaskMainAll);
-        
-       setSelectedItem('')
-       
+       setSelectedItem('');
     }
     
-    
-
     return(
         <div className="main">
-            <div className="mainButtonAdd"><button  onClick={() => addTask() } ><Button /></button></div>
+            <div className="mainButtonAdd"><button  onClick={() => addTask() } ><Button />{count}</button></div>
             
             <div className="mainButtonAdd"><Input type='text' value={value}  onChange={(event) => getValueInput(event)}/> </div> 
             
