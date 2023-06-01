@@ -9,21 +9,19 @@ import Input from "../input/Input";
 import Button from "../button/Button";
 
 import {v4 as uuidv4 } from "uuid";
-
+import { AllTasks } from "../../hooks/hooks";
 
 function Main () {
-    const [taskMainAll, setTaskMainAll] = useState([]); //хранилище тасок.
+
+    const [taskMainAll, setTaskMainAll] = React.useContext(AllTasks)
     const [value, setValue] = useState(''); //state(хранилище) input, setValue- изменение значения value.
     const [selectedItem, setSelectedItem] = useState(''); // хранилище
     const [editTitle, setEditTitle] = useState('');// хранилище тайтла выбраной таски 
-    const [count, setCount] = useState('');
-   
-
+    
     const getValueInput = (event) => {
         setValue(event.target.value); //текст с инпута ложим в свой 'State' setValue (target.value(свойство ивента) target -ссылка на объект)
        //  console.log(event);
     }
-
     const addTask = () => {
         const task = { 
             text: value,
@@ -33,14 +31,11 @@ function Main () {
         if (value !== '') { 
             setTaskMainAll([...taskMainAll, task])   
             setValue(''); // сбрасывает стате инпута на пустую строку
-            setCount(prevCount => prevCount + 1)
+            
     }
          // ... spread оператор  развернули массив, таск добавили
-         
-
-         
+        
     }
-    
 
     const checkBoxOn = (id) => {
         const changeTaskMainAll = taskMainAll.map((task) => {
@@ -52,15 +47,13 @@ function Main () {
                
             }
             return task
-            
         })   
         setTaskMainAll(changeTaskMainAll)
-        
     }  
 
     const delTask = (id) => {
         setTaskMainAll(taskMainAll.filter(obj => obj.id !== id))
-        setCount(count - 1);
+       
         };
 
     const editTask = (id, text) => {  
@@ -88,9 +81,9 @@ function Main () {
     
     return(
         <div className="main">
-            <div className="mainButtonAdd"><button  onClick={() => addTask() } ><Button />{count}</button></div>
+            <div className="mainButtonAdd"><button  onClick={() => addTask()} ><Button />{taskMainAll.length}</button></div>
             
-            <div className="mainButtonAdd"><Input type='text' value={value}  onChange={(event) => getValueInput(event)}/> </div> 
+            <div className="mainButtonAdd"><Input type='text' value={value} onChange={(event) => getValueInput(event)}/> </div> 
             
             {taskMainAll && taskMainAll.map((task, index) => 
 
@@ -106,3 +99,6 @@ function Main () {
     );  
 }
 export default Main;
+
+
+

@@ -1,17 +1,4 @@
-import { useEffect, useState } from 'react'
+import React from "react";
 
-function useDebounce(value,  delay ) {
-  const [debouncedValue, setDebouncedValue] = useState(value)
+export const AllTasks = React.createContext();
 
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay || 500)
-
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [value, delay])
-
-  return debouncedValue
-}
-
-export default useDebounce
