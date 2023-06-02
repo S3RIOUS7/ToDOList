@@ -8,9 +8,11 @@ import { AllTasks } from "./hooks/hooks.js";
 function App() {
 
   const [taskMainAll, setTaskMainAll] = useState([]);
+  const madeTask = taskMainAll.filter(task => task.checked !== false)
 
+  
   return (
-    <AllTasks.Provider value={ [taskMainAll, setTaskMainAll] } >
+    <AllTasks.Provider value={ [taskMainAll, setTaskMainAll, madeTask] } >
     <div className="mainContainer">
 
       <div className="header">

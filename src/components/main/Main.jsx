@@ -13,7 +13,7 @@ import { AllTasks } from "../../hooks/hooks";
 
 function Main () {
 
-    const [taskMainAll, setTaskMainAll] = React.useContext(AllTasks)
+    const [taskMainAll, setTaskMainAll, madeTask] = React.useContext(AllTasks)
     const [value, setValue] = useState(''); //state(хранилище) input, setValue- изменение значения value.
     const [selectedItem, setSelectedItem] = useState(''); // хранилище
     const [editTitle, setEditTitle] = useState('');// хранилище тайтла выбраной таски 
@@ -50,11 +50,16 @@ function Main () {
         })   
         setTaskMainAll(changeTaskMainAll)
     }  
+   
+    console.log()
 
+   // const madeTask = taskMainAll.filter(md => md.checked !== false)
+    
     const delTask = (id) => {
         setTaskMainAll(taskMainAll.filter(obj => obj.id !== id))
        
         };
+
 
     const editTask = (id, text) => {  
         setSelectedItem(id);// ложиться в стейт
@@ -81,7 +86,7 @@ function Main () {
     
     return(
         <div className="main">
-            <div className="mainButtonAdd"><button  onClick={() => addTask()} ><Button />{taskMainAll.length}</button></div>
+            <div className="mainButtonAdd"><button  onClick={() => addTask()}><Button />{madeTask.length}</button></div>
             
             <div className="mainButtonAdd"><Input type='text' value={value} onChange={(event) => getValueInput(event)}/> </div> 
             
