@@ -9,101 +9,94 @@ import Input from "../input/Input";
 import Button from "../button/Button";
 
 import {v4 as uuidv4 } from "uuid";
-import { AllTasks } from "../../hooks/hooks";
+import { useSelector, useDispatch } from 'react-redux';
+import { addTask, toggleTask, delTask, editTask, saveNewTask } from '../../redux/actions';
+function Main() {
+  const [value, setValue] = useState('');
+  const [selectedItem, setSelectedItem] = useState('');
+  const [editTitle, setEditTitle] = useState('');
 
-function Main () {
+  // Используем useSelector для получения состояния из Redux
+  const taskMainAll = useSelector((state) => state.taskMainAll);
 
-    const [taskMainAll, setTaskMainAll, madeTask] = React.useContext(AllTasks)
-    const [value, setValue] = useState(''); //state(хранилище) input, setValue- изменение значения value.
-    const [selectedItem, setSelectedItem] = useState(''); // хранилище
-    const [editTitle, setEditTitle] = useState('');// хранилище тайтла выбраной таски 
-    
-    const getValueInput = (event) => {
-        setValue(event.target.value); //текст с инпута ложим в свой 'State' setValue (target.value(свойство ивента) target -ссылка на объект)
-       //  console.log(event);
+  // Используем useDispatch для получения функции dispatch из Redux
+  const dispatch = useDispatch();
+
+  const getValueInput = (event) => {
+    setValue(event.target.value);
+  };
+
+  const handleAddTask = () => {
+    const task = {
+      text: value,
+      checked: false,
+      id: uuidv4(),
+    };
+    if (value !== '') {
+      dispatch(addTask(task)); // Используем dispatch для добавления задачи
+      setValue('');
     }
-    const addTask = () => {
-        const task = { 
-            text: value,
-            checked: false,
-            id: uuidv4(), //динамический id
-        }
-        if (value !== '') { 
-            setTaskMainAll([...taskMainAll, task])   
-            setValue(''); // сбрасывает стате инпута на пустую строку
-            
-    }
-         // ... spread оператор  развернули массив, таск добавили
-        
-    }
+  };
 
-    const checkBoxOn = (id) => {
-        const changeTaskMainAll = taskMainAll.map((task) => {
-            if(task.id === id) {
-                return{
-                    ...task,
-                    checked: !task.checked,
-                }
-               
-            }
-            return task
-        })   
-        setTaskMainAll(changeTaskMainAll)
-    }  
-   
-    console.log()
+  const checkBoxOn = (id) => {
+    dispatch(toggleTask(id)); // Используем dispatch для переключения флага задачи
+  };
 
-   // const madeTask = taskMainAll.filter(md => md.checked !== false)
-    
-    const delTask = (id) => {
-        setTaskMainAll(taskMainAll.filter(obj => obj.id !== id))
-       
-        };
+  const handleDelTask = (id) => {
+    dispatch(delTask(id)); // Используем dispatch для удаления задачи
+  };
 
+  const handleEditTask = (id, text) => {
+    setSelectedItem(id);
+    setEditTitle(text);
+  };
 
-    const editTask = (id, text) => {  
-        setSelectedItem(id);// ложиться в стейт
-        setEditTitle(text);// ложиться в стейт
+  const handleChangeTitle = (event) => {
+    setEditTitle(event.target.value);
+  };
 
-    }
-    const changeTitle = (event) => {
+  const handleSaveNewTask = (id) => {
+    dispatch(saveNewTask(id, editTitle)); // Используем dispatch для сохранения отредактированной задачи
+    setSelectedItem('');
+  };
 
-        setEditTitle(event.target.value)
-    }
-    const saveNewTask = (id) => {       
-        const changeTaskMainAll = taskMainAll.map((task) => {
-            if(task.id === id) {
-                return{
-                    ...task,
-                    text: editTitle,
-                }
-            }
-            return task
-        })   
-        setTaskMainAll(changeTaskMainAll);
-       setSelectedItem('');
-    }
-    
-    return(
-        <div className="main">
-            <div className="mainButtonAdd"><button  onClick={() => addTask()}><Button />{madeTask.length}</button></div>
-            
-            <div className="mainButtonAdd"><Input type='text' value={value} onChange={(event) => getValueInput(event)}/> </div> 
-            
-            {taskMainAll && taskMainAll.map((task, index) => 
+  return (
+    <div className="main">
+      <div className="mainButtonAdd">
+        <button onClick={handleAddTask}>
+          <Button />{/* Ваш компонент Button */}
+        </button>
+      </div>
 
-            <div key={index}> 
-            <div className={task.checked ? 'linethrou goal' : 'goal'} >   
-                <button className="mainButtonAdd" onClick={() => delTask(task.id) }><img width="25" src={bagSvg} alt="bag"  /></button>
-                <button className="mainButtonAdd" onClick={() => editTask(task.id, task.text)} ><img width="30" src={penSvg} alt="pen" /></button>
-                <Input  type='checkbox' checked={task.checked} onChange={() => checkBoxOn(task.id)}/>
-                {selectedItem === task.id ? <Input value={editTitle} onChange={(event) => changeTitle(event)}/> : task.text}
-                 <button className="mainButtonAdd"  onClick={() => saveNewTask(task.id)} ><img width="28" src={dickSvg} alt="pen" /></button></div>
-            </div>)}
+      <div className="mainButtonAdd">
+        <Input type='text' value={value} onChange={getValueInput} />
+      </div>
+
+      {taskMainAll && taskMainAll.map((task) => (
+        <div key={task.id}>
+          <div className={task.checked ? 'linethrou goal' : 'goal'}>
+            <button className="mainButtonAdd" onClick={() => handleDelTask(task.id)}>
+              <img width="25" src={bagSvg} alt="bag" />
+            </button>
+            <button className="mainButtonAdd" onClick={() => handleEditTask(task.id, task.text)}>
+              <img width="30" src={penSvg} alt="pen" />
+            </button>
+            <Input type='checkbox' checked={task.checked} onChange={() => checkBoxOn(task.id)} />
+            {selectedItem === task.id ? (
+              <Input value={editTitle} onChange={handleChangeTitle} />
+            ) : (
+              task.text
+            )}
+            <button className="mainButtonAdd" onClick={() => handleSaveNewTask(task.id)}>
+              <img width="28" src={dickSvg} alt="pen" />
+            </button>
+          </div>
         </div>
-    );  
+      ))}
+    </div>
+  );
 }
-export default Main;
 
+export default Main;
 
 

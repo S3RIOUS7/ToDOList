@@ -1,31 +1,49 @@
-import { combineReducers } from "redux";
+const initialState = {
+  taskMainAll: [],
+};
 
-import { ADD_TASK, LINE_TASK, DELETE_TASK, EDIT_TASK } from "./actions";
-
-const tasksReducer = (state = [], action) => {
+const appReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TASK:
-      return [...state, { text: action.payload.text, checked: false, id: uuidv4() }];
-
-    case LINE_TASK:
-      return state.map((task) =>
-        task.id === action.payload.id ? { ...task, checked: !task.checked } : task
-      );
-
-    case DELETE_TASK:
-      return state.filter((task) => task.id !== action.payload.id);
-
-    case EDIT_TASK:
-      return state.map((task) =>
-        task.id === action.payload.id ? { ...task, text: action.payload.text } : task
-      );
-
+    case 'ADD_TASK':
+      return {
+        ...state,
+        taskMainAll: [...state.taskMainAll, action.payload],
+      };
+    case 'TOGGLE_TASK':
+      return {
+        ...state,
+        taskMainAll: state.taskMainAll.map((task) =>
+          task.id === action.payload
+            ? { ...task, checked: !task.checked }
+            : task
+        ),
+      };
+    case 'DELETE_TASK':
+      return {
+        ...state,
+        taskMainAll: state.taskMainAll.filter((task) => task.id !== action.payload),
+      };
+    case 'EDIT_TASK':
+      return {
+        ...state,
+        taskMainAll: state.taskMainAll.map((task) =>
+          task.id === action.payload.taskId
+            ? { ...task, text: action.payload.newText }
+            : task
+        ),
+      };
+    case 'SAVE_NEW_TASK':
+      return {
+        ...state,
+        taskMainAll: state.taskMainAll.map((task) =>
+          task.id === action.payload.taskId
+            ? { ...task, text: action.payload.newText }
+            : task
+        ),
+      };
     default:
       return state;
   }
 };
 
-export const rootReducer = combineReducers({
-  tasks: tasksReducer,
- 
-});
+export default appReducer;

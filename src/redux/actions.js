@@ -1,24 +1,37 @@
-export const ADD_TASK = 'ADD_TAST';
-export const DELETE_TASK = 'DELETE_TASK';
-export const EDIT_TASK = 'EDIT_TASK';
-export const LINE_TASK = 'LINE_TASK';
 
-export const addTask = (text) => ({
-  type: ADD_TASK,
-  payload: { text },
-});
 
-export const lineTask  = (id) => ({
-  type: LINE_TASK,
-  payload: { id },
-});
 
-export const deleteTask = (id) => ({
-  type: DELETE_TASK,
-  payload: { id },
-});
+export const addTask = (task) => {
+  return {
+    type: 'ADD_TASK',
+    payload: task,
+  };
+};
 
-export const editTask = (id, text) => ({
-  type: EDIT_TASK,
-  payload: { id, text },
-});
+export const toggleTask = (taskId) => {
+  return {
+    type: 'TOGGLE_TASK',
+    payload: taskId,
+  };
+};
+
+export const delTask = (taskId) => {
+  return {
+    type: 'DELETE_TASK',
+    payload: taskId,
+  };
+};
+
+export const editTask = (taskId, newText) => {
+  return {
+    type: 'EDIT_TASK',
+    payload: { taskId, newText },
+  };
+};
+
+export const saveNewTask = (taskId, newText) => {
+  return {
+    type: 'SAVE_NEW_TASK',
+    payload: { taskId, newText },
+  };
+};

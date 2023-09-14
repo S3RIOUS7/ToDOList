@@ -1,29 +1,21 @@
-
-import React, { useState } from "react";
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from '../src/redux/store'; // Импортируйте ваш Redux store
 import Header from "./components/header/Header.jsx";
 import Main from "./components/main/Main.jsx";
-import { AllTasks } from "./hooks/hooks.js";
-
 
 function App() {
-
-  const [taskMainAll, setTaskMainAll] = useState([]);
-  const madeTask = taskMainAll.filter(task => task.checked !== false)
-
-  
   return (
-    <AllTasks.Provider value={ [taskMainAll, setTaskMainAll, madeTask] } >
-    <div className="mainContainer">
-
-      <div className="header">
-        <Header />
+    <Provider store={store}>
+      <div className="mainContainer">
+        {/* <div className="header">
+          <Header />
+        </div> */}
+        <div className="container">
+          <Main />
         </div>
-      <div className="container">
-        <Main />
       </div>
-   
-    </div>
-    </AllTasks.Provider>
+    </Provider>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React  from "react"
 import logoSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/images.jpg'
 import handSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/hand.jpg'
 import  "./Header.scss"
