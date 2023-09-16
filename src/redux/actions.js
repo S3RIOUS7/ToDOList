@@ -35,3 +35,24 @@ export const saveNewTask = (taskId, newText) => {
     payload: { taskId, newText },
   };
 };
+
+export const setValue = (value) => {
+  return{
+    type: 'SET_VALUE',
+    payload: value,
+  };
+};
+
+export const setSelectedItem = (id) => {
+  return {
+    type: 'SET_SELECTED_ITEM',
+    payload: id,
+  };
+};
+
+export const setEditTitle = (title) => {
+return{
+  type: 'SET_EDIT_TITLE',
+  payload: title,
+};
+};

@@ -2,15 +2,14 @@ import React  from "react"
 import logoSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/images.jpg'
 import handSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/hand.jpg'
 import  "./Header.scss"
-import { AllTasks } from "../../hooks/hooks";
-
+import { useSelector } from 'react-redux';
 
 
 function Header(){
+  const taskMainAll = useSelector((state) => state.taskMainAll);
+  const totalTasks = taskMainAll.length;
+  const completedTasks = taskMainAll.filter((task) => task.checked).length;
 
-    const [taskMainAll, setTaskMainAll, madeTask] = React.useContext(AllTasks)
-
-    
     return(
         <div className="container">
         <div className="header">
@@ -19,8 +18,8 @@ function Header(){
             <img width="45" src= {logoSvg} alt="boy" /></div>
             <div className="logoDiskr">
               <div className='logoDiskrImg'>Hi Shobhit <div className="logoHand"><img src= {handSvg} alt="hand"/></div></div>
-             <p> {taskMainAll.length} tasks pending</p>
-             <p> {madeTask.length} tasks complited</p>
+              <p>{totalTasks} tasks pending</p>
+            <p>{completedTasks} tasks completed</p>
             </div></div>
             <div className='headerTitle'><h1>TaskDO</h1></div>
             <div className='headerLogIn'>Login</div>

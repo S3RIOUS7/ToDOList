@@ -1,5 +1,5 @@
 import "./main.scss"
-import React, { useState } from "react";
+import React from "react";
 import bagSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/bag.png'
 import penSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/pen.png'
 import dickSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/dick.png'
@@ -10,20 +10,20 @@ import Button from "../button/Button";
 
 import {v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from 'react-redux';
-import { addTask, toggleTask, delTask, editTask, saveNewTask } from '../../redux/actions';
-function Main() {
-  const [value, setValue] = useState('');
-  const [selectedItem, setSelectedItem] = useState('');
-  const [editTitle, setEditTitle] = useState('');
+import { addTask, toggleTask, delTask, saveNewTask, setValue, setSelectedItem, setEditTitle } from '../../redux/actions';
 
+
+function Main() {
   // Используем useSelector для получения состояния из Redux
+  const value = useSelector((state) => state.value);
+  const selectedItem = useSelector((state) => state.selectedItem);
+  const editTitle = useSelector((state) => state.editTitle);
   const taskMainAll = useSelector((state) => state.taskMainAll);
 
-  // Используем useDispatch для получения функции dispatch из Redux
   const dispatch = useDispatch();
 
   const getValueInput = (event) => {
-    setValue(event.target.value);
+    dispatch(setValue(event.target.value));
   };
 
   const handleAddTask = () => {
@@ -34,7 +34,7 @@ function Main() {
     };
     if (value !== '') {
       dispatch(addTask(task)); // Используем dispatch для добавления задачи
-      setValue('');
+      dispatch(setValue(''));
     }
   };
 
@@ -47,17 +47,17 @@ function Main() {
   };
 
   const handleEditTask = (id, text) => {
-    setSelectedItem(id);
-    setEditTitle(text);
+    dispatch(setSelectedItem(id));
+    dispatch(setEditTitle(text));
   };
 
   const handleChangeTitle = (event) => {
-    setEditTitle(event.target.value);
+    dispatch(setEditTitle(event.target.value));
   };
 
   const handleSaveNewTask = (id) => {
     dispatch(saveNewTask(id, editTitle)); // Используем dispatch для сохранения отредактированной задачи
-    setSelectedItem('');
+    dispatch(setSelectedItem(''));
   };
 
   return (

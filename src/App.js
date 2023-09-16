@@ -8,9 +8,9 @@ function App() {
   return (
     <Provider store={store}>
       <div className="mainContainer">
-        {/* <div className="header">
+        <div className="header">
           <Header />
-        </div> */}
+        </div>
         <div className="container">
           <Main />
         </div>
