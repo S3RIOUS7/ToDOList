@@ -8,9 +8,9 @@ import dickSvg from '/Projects/reactProjects/my-todo-list/src/assets/img/dick.pn
 import Input from "../input/Input";
 import Button from "../button/Button";
 
-import {v4 as uuidv4 } from "uuid";
+
 import { useSelector, useDispatch } from 'react-redux';
-import { addTask, toggleTask, delTask, saveNewTask, setValue, setSelectedItem, setEditTitle } from '../../redux/actions';
+import {  toggleTask, delTask, saveNewTask, setValue, setSelectedItem, setEditTitle } from '../../redux/actions';
 
 
 function Main() {
@@ -27,13 +27,8 @@ function Main() {
   };
 
   const handleAddTask = () => {
-    const task = {
-      text: value,
-      checked: false,
-      id: uuidv4(),
-    };
     if (value !== '') {
-      dispatch(addTask(task)); // Используем dispatch для добавления задачи
+      dispatch({ type: 'NEW_ADD_TASK', payload: { text: value } });
       dispatch(setValue(''));
     }
   };
@@ -64,7 +59,7 @@ function Main() {
     <div className="main">
       <div className="mainButtonAdd">
         <button onClick={handleAddTask}>
-          <Button />{/* Ваш компонент Button */}
+          <Button />
         </button>
       </div>
 

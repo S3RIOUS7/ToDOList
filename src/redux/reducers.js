@@ -1,3 +1,6 @@
+import {v4 as uuidv4 } from "uuid";
+
+
 const initialState = {
   taskMainAll: [],
   value: '',
@@ -5,13 +8,23 @@ const initialState = {
   editTitle: '',
 };
 
+
+
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_TASK':
+
+    case 'NEW_ADD_TASK':
+      const newTask = {
+        text: action.payload.text, 
+        checked: false,
+        id: uuidv4(),
+      };
       return {
         ...state,
-        taskMainAll: [...state.taskMainAll, action.payload],
+        taskMainAll: [...state.taskMainAll, newTask],
       };
+
+    
     case 'TOGGLE_TASK':
       return {
         ...state,
@@ -26,15 +39,7 @@ const appReducer = (state = initialState, action) => {
         ...state,
         taskMainAll: state.taskMainAll.filter((task) => task.id !== action.payload),
       };
-    // case 'EDIT_TASK':
-    //   return {
-    //     ...state,
-    //     taskMainAll: state.taskMainAll.map((task) =>
-    //       task.id === action.payload.taskId
-    //         ? { ...task, text: action.payload.newText }
-    //         : task
-    //     ),
-    //   };
+  
     case 'SAVE_NEW_TASK':
       return {
         ...state,
@@ -55,6 +60,7 @@ case 'SET_SELECTED_ITEM':
     selectedItem: action.payload,
   };
 case 'SET_EDIT_TITLE':
+  console.log(action.payload)
   return {
     ...state,
     editTitle: action.payload,

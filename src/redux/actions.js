@@ -1,6 +1,5 @@
 
 
-
 export const addTask = (task) => {
   return {
     type: 'ADD_TASK',
@@ -19,13 +18,6 @@ export const delTask = (taskId) => {
   return {
     type: 'DELETE_TASK',
     payload: taskId,
-  };
-};
-
-export const editTask = (taskId, newText) => {
-  return {
-    type: 'EDIT_TASK',
-    payload: { taskId, newText },
   };
 };
 
@@ -56,3 +48,4 @@ return{
   payload: title,
 };
 };
+

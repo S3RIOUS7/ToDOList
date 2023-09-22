@@ -10,6 +10,7 @@ function Header(){
   const totalTasks = taskMainAll.length;
   const completedTasks = taskMainAll.filter((task) => task.checked).length;
 
+ 
     return(
         <div className="container">
         <div className="header">
